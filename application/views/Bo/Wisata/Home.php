@@ -28,8 +28,8 @@
                                 <tr>
                                     <td><?= ++$start ?></td>
                                     <td>
-                                        <button onclick=delete_wisata(<?= $item->id_wisata; ?>) class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
-                                        <a href="<?= site_url('Wisata/UpdateWisata/' . $item->id_wisata) ?>" class=" btn-primary btn-sm"><i class="fa fa-pencil"></i> Ubah</a>
+                                        <a href="javascript:void(0)" onclick=delete_wisata(<?= $item->id_wisata; ?>) class="btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="<?= site_url('Wisata/UpdateWisata/' . $item->id_wisata) ?>" class=" btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                     </td>
                                     <td><?php echo $item->kategori; ?></td>
                                     <td><?php echo $item->nm_wisata; ?></td>

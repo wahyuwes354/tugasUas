@@ -28,7 +28,7 @@
                                 <td><?= ++$start ?></td>
                                 <td>
                                     <!-- <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-warning btn-sm"><i class="fa fa-key"></i> Reset</a> -->
-                                    <a href="" onclick=delete_user(<?= $item->id_user; ?>) class="btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:void(0)" onclick=delete_user(<?= $item->id_user; ?>) class="btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                                     <a href="<?= site_url('User/UpdateUser/' . $item->id_user); ?>" class=" btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                 </td>
                                 <td><?php echo $item->nama; ?></td>
