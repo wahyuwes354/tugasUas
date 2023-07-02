@@ -84,9 +84,6 @@ class Wisata extends CI_Controller
         $where = array('id_user' => $id_user);
         $data['user'] = $this->M_admin->get_where($table, $where)->row();
 
-        // var_dump($data['user']);
-        // die();
-
         $this->template->views('bo/User/UpdateUser', $data);
     }
 
