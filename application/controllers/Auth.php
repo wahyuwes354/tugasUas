@@ -36,8 +36,13 @@ class Auth extends CI_Controller
             $data     = $this->M_auth->login($username, $password);
 
             if ($data == false) {
-                // $this->session->set_flashdata('error_msg', show_err_msg('<b style="font-size: 20px">GAGAL</b><br>Username / Password Anda Salah.'));
-                redirect('Home');
+                $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>Gagal Login</strong> Pastikan User dan Password yang Anda Masukkan Benar.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>');
+                redirect('Home/Login');
             } else {
                 $userdata = array(
                     'id_user'     => $data->id_user,
@@ -49,7 +54,13 @@ class Auth extends CI_Controller
                 redirect('Dashboard');
             }
         } else {
-            $this->session->set_flashdata('error_msg', validation_errors());
+            $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Periksa Isian!</strong>' . validation_errors() . '.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>');
+
             redirect('Home/Login');
         }
     }
@@ -57,58 +68,56 @@ class Auth extends CI_Controller
 
     function addRegister()
     {
+        $this->form_validation->set_rules('nm_lengkap', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('pass', 'Password', 'required');
+        $this->form_validation->set_rules('repass', 'Re Password', 'required');
 
-        // $this->form_validation->set_rules('nm_lengkap', 'Nama Lengkap', 'required');
-        // $this->form_validation->set_rules('email', 'Email', 'required');
-        // $this->form_validation->set_rules('pass', 'Password', 'required');
-        // $this->form_validation->set_rules('repass', 'Re Password', 'required');
-
-        // if ($this->form_validation->run() == TRUE) {
-        // $pass = trim($_POST['pass']);
-        // $repass = trim($_POST['repass']);
-
-        $pass   = trim($this->input->post('pass'));
-        $repass = trim($this->input->post('repass'));
+        if ($this->form_validation->run() == TRUE) {
+            $pass   = trim($this->input->post('pass'));
+            $repass = trim($this->input->post('repass'));
+            $nama   = $this->input->post('nm_lengkap');
+            $email  = $this->input->post('email');
 
 
-        if ($pass != $repass) {
-            $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                                <strong>Password Failed</strong>Password Tidak Sama.
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                                </div>');
-            // redirect('Auth/Register');
-        }
-
-        $cekemail = $this->M_auth->cek_email($this->input->post('email'));
-        if (!empty($cekemail)) {
-            $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                                <strong>Email Sudah Terdafatr</strong>Silakan menuju ke halaman login.
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                                </div>');
-            redirect('Home/Register');
-            // $return = "udah ada";
-        } else {
-            $nama           = $this->input->post('nm_lengkap');
-            $email          = $this->input->post('email');
-            $pass           = md5($this->input->post('repass'));
+            if ($pass != $repass) {
+                $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>Password Failed</strong>Password Tidak Sama.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>');
+                redirect('Home/Register');
+            }
 
             $data = array(
                 'nama'          => $nama,
                 'username'      => $nama,
                 'email'         => $email,
-                'pass'          => $pass,
-                'status'        => 'Register',
+                'pass'          => md5($repass),
+                'status'        => '3',
                 'id_role'       => '2',
             );
 
-            $return = $this->M_admin->save($data, 'tbl_user');
+            $this->M_admin->save($data, 'tbl_user');
+
+            $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Registrasi Berhasil</strong> Silakan Login menggunakan Email Dan Password anda.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>');
+
             redirect('Home/Login');
+        } else {
+            $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Periksa Isian!</strong>' . validation_errors() . '.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>');
+            redirect('Home/Register');
         }
-        // echo json_encode($return);
     }
 
 

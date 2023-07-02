@@ -18,13 +18,10 @@
         <a href="#" class="dropdown-item">
           <!-- Message Start -->
           <div class="media">
-            <img src="<?php echo base_url(); ?>assets/img/logo_kab.png" alt="User Avatar" class="img-size-50 mr-3">
             <div class="media-body">
               <h3 class="dropdown-item-title">
                 <?php echo strtoupper($this->session->userdata('username')); ?>
               </h3>
-              <p class="text-sm">Desa <?= ucfirst(strtolower($this->session->userdata('nama_desa'))); ?></p>
-              <p class="text-sm">Kecamatan <?= ucfirst(strtolower($this->session->userdata('nama_kec'))); ?></p>
             </div>
           </div>
           <!-- Message End -->

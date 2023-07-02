@@ -1,27 +1,49 @@
 <div class="row">
+    <div class="col-md-12">
+        <div class="callout callout-info">
+            <?= $this->session->flashdata('msg'); ?>
+        </div>
+    </div>
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <!-- <button class="btn btn-success" onclick="tambah_calon()"><i class="fa fa-user"></i> Tambah Calon</button> -->
-                <!-- <button class="btn btn-success" onclick="tambah_calon()"><i class="fa fa-user"></i> Tambah Calon</button> -->
                 <a class="btn btn-success" href="<?= site_url('User/AddUser'); ?>"><i class="fa fa-user"></i> Tambah Pengguna</a>
             </div>
             <div class="card-body">
-                <table id="Calon" class="table table-bordered table-striped">
+                <table id="tblUser" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th style="width:5%;">#</th>
                             <th style="width:10%;"></th>
                             <th style="width:10%;">Nama</th>
-                            <th style="width:50%;">Email</th>
-                            <th style="width:25%;">Status</th>
+                            <th style="width:45%;">Email</th>
+                            <th style="width:15%;">Role</th>
+                            <th style="width:15%;">Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        foreach ($data as $item) : ?>
+                            <tr>
+                                <td><?= ++$start ?></td>
+                                <td>
+                                    <!-- <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-warning btn-sm"><i class="fa fa-key"></i> Reset</a> -->
+                                    <button onclick=delete_user(<?= $item->id_user; ?>) class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                    <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-primary btn-sm"><i class="fa fa-pencil"></i> Ubah</a>
+                                </td>
+                                <td><?php echo $item->nama; ?></td>
+                                <td><?php echo $item->email; ?></td>
+                                <td><?php echo $item->id_role; ?></td>
+                                <td><?php echo $item->status; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                     </tfoot>
                 </table>
+            </div>
+            <div class="card-body">
+                <?php echo $pagination; ?>
             </div>
         </div>
     </div>
@@ -43,62 +65,8 @@
     </div>
 </div>
 
-<!-- <div class="modal" id="modal_calon" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Calon Kepala Desa</h4>
-            </div>
-            <form method="POST" action="" id="frm_calon" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input hidden type="text" id="id_calon" name="id_calon">
-                    <div class="form-group">
-                        <label for="">Kategori Wisata</label>
-                        <select name="" id="">
-                            <option value="">Wisata Alam</option>
-                            <option value="">Wisata Kuliner</option>
-                            <option value="">Wisata Religi</option>
-                            <option value="">Wisata Budaya</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nama Tempat Wisata</label>
-                        <input type="number" name="nourut" id="nourut" class="form-control" placeholder="Nomor Calon">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nomor Urut Calon</label>
-                        <input type="number" name="nourut" id="nourut" class="form-control" placeholder="Nomor Calon">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nama Calon</label>
-                        <input type="text" name="nmcalon" id="nmcalon" class="form-control" placeholder="Nama Calon">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" onclick="simpan()">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-
 <script type="text/javascript">
-    let save_method;
-
-    $(document).ready(function() {
-        tblCalon = $('#Calon').DataTable({
-            "ajax": "<?php echo site_url('Calon/ajax_list') ?>",
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": false,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true
-        });
-    });
-
-    function delete_calon(id) {
+    function delete_user(id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -118,17 +86,19 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "<?php echo site_url('calon/delete') ?>/" + id,
+                    url: "<?php echo site_url('User/delete') ?>/" + id,
                     type: "POST",
                     dataType: "JSON",
                     success: function(data) {
-                        tblCalon.ajax.reload(null, false);
+                        console.log(data);
                         swalWithBootstrapButtons.fire({
                             icon: 'success',
                             title: 'Akun Telah berhasil di hapus',
                             showConfirmButton: false,
                             timer: 1500
                         });
+
+                        location.reload();
                     }
                 });
             } else if (
@@ -154,7 +124,7 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('calon/get_id') ?>/" + id,
+            url: "<?php echo site_url('User/get_id') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -170,16 +140,6 @@
                 alert('Gagal Memanggil Data!!');
             }
         });
-    }
-
-    function tambah_calon() {
-        save_method = 'add';
-        // $('#frm_calon')[0].reset();
-        // $('#modal_calon')[0].reset(); // reset form on modals
-        // $('.form-group').removeClass('has-error'); // clear error class
-        // $('.help-block').empty(); // clear error string
-        $('#modal_calon').modal('show'); // show bootstrap modal
-        $('.modal-title').text('Tambah Calon'); // Set Title to Bootstrap modal title
     }
 
     function simpan() {

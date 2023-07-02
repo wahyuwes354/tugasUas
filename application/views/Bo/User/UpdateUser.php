@@ -5,33 +5,32 @@
             <?= $this->session->flashdata('msg'); ?>
         </div>
         <div class="card">
-            <form method="POST" action="<?= site_url('User/simpanUser') ?>" id="frm_calon" enctype="multipart/form-data">
+            <form method="POST" action="<?= site_url('User/doUpdate?id_user=') . $user->id_user ?>" id="frm_user" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input hidden type="text" id="id_user" name="id_user">
                     <div class="form-group">
                         <label for="">Role User</label>
                         <select name="role" id="role" class="form-control">
                             <?php foreach ($role as $rl) { ?>
-                                <option value="<?= $rl->id_role ?>"><?= $rl->name ?></option>
+                                <option value="<?= $rl->id_role ?>" <?= ($rl->id_role == $user->id_role) ? "selected" : "" ?>><?= $rl->name ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="">Nama User</label>
-                        <input type="text" name="nm_lengkap" id="nm_lengkap" class="form-control" placeholder="Nama User">
+                        <input type="text" name="nm_lengkap" id="nm_lengkap" class="form-control" placeholder="Nama User" value="<?= $user->nama ?>">
                     </div>
                     <div class="form-group">
                         <label for="">Email User</label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="text" name="pass" id="pass" class="form-control" placeholder="Password">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="<?= $user->email ?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Retype Password</label>
-                        <input type="text" name="repass" id="repass" class="form-control" placeholder="Retype Password">
+                        <label for="">Status User</label>
+                        <select name="status" id="status" class="form-control">
+                            <?php foreach ($status_pengguna as $sp) { ?>
+                                <option value="<?= $sp->id_status ?>" <?= ($sp->id_status == $user->id_status) ? "selected" : "" ?>><?= $sp->status ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

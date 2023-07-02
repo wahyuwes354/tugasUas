@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>BolangMagelang | Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,14 +17,17 @@
 </head>
 
 <body class="hold-transition login-page">
-    <?= var_dump($this->session->userdata()); ?>
+    <!-- <?= var_dump($this->session->userdata()); ?> -->
+
+    <?= $this->session->flashdata('msg'); ?>
+
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?= base_url() ?>assets/bo/index2.html"><b>Admin</b>LTE</a>
+            <a href="<?= base_url() ?>assets/bo/index2.html"><b>Bolang</b>Magelang</a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Login Untuk Masuk Ke Akun Anda</p>
 
                 <form action="<?php echo site_url('Auth/login'); ?>" method="post">
                     <div class="input-group mb-3">
@@ -45,12 +48,12 @@
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Log In</button>
                         </div>
                     </div>
                 </form>
                 <p class="mb-0">
-                    <a href="<?= site_url('Home/Register') ?>" class="text-center">Register a new membership</a>
+                    <span> Belum Punya Akun ? Silakan </span><a href="<?= site_url('Home/Register') ?>" class="text-center">Register</a>
                 </p>
             </div>
         </div>

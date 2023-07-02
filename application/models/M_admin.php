@@ -3,18 +3,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_admin extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // $this->load->model('M_');
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    // }
 
     public function update($name_id, $id, $table, $data)
     {
-        $this->db->where($name_id, $id);
-        $this->db->update($table, $data);
+        try {
+            $this->db->where($name_id, $id);
+            $this->db->update($table, $data);
 
-        return true;
+            return true;
+        } catch (Exception $e) {
+            $return = $e->getMessage();
+        }
+
+        return $return;
     }
 
     public function save($data, $table)
@@ -27,5 +32,34 @@ class M_admin extends CI_Model
     {
         $this->db->where($id_name, $id);
         $this->db->delete($table);
+
+        return true;
+    }
+
+    public function list_data($limit, $offset, $tabel)
+    {
+        $this->db->limit($limit, $offset);
+        $query = $this->db->query($tabel);
+        return $query->result();
+    }
+
+    public function count_data($tabel)
+    {
+        return $this->db->query($tabel)->num_rows();
+    }
+
+    public function countTable($tabel)
+    {
+        return $this->db->get($tabel)->num_rows();
+    }
+
+    public function get_where($table, $where)
+    {
+        return $this->db->get_where($table, $where);
+    }
+
+    public function get_all_date($table)
+    {
+        return $this->db->get($table);
     }
 }
