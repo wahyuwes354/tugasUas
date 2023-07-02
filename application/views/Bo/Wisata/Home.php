@@ -28,7 +28,7 @@
                                 <tr>
                                     <td><?= ++$start ?></td>
                                     <td>
-                                        <button onclick=delete_user(<?= $item->id_wisata; ?>) class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                        <button onclick=delete_wisata(<?= $item->id_wisata; ?>) class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
                                         <a href="<?= site_url('Wisata/UpdateWisata/' . $item->id_wisata) ?>" class=" btn-primary btn-sm"><i class="fa fa-pencil"></i> Ubah</a>
                                     </td>
                                     <td><?php echo $item->kategori; ?></td>
@@ -51,7 +51,7 @@
 </div>
 
 <script type="text/javascript">
-    function delete_user(id) {
+    function delete_wisata(id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -61,8 +61,8 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Yakin Akan Menghapus Akun Ini ?',
-            text: "Akun Yang di hapus tidak bisa di kembalikan lagi!",
+            title: 'Yakin Akan Menghapus Data Ini ?',
+            text: "Data Yang di hapus tidak bisa di kembalikan lagi!",
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Ya, Hapus',
@@ -71,7 +71,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "<?php echo site_url('User/delete') ?>/" + id,
+                    url: "<?php echo site_url('Wisata/delete') ?>/" + id,
                     type: "POST",
                     dataType: "JSON",
                     success: function(data) {
@@ -91,7 +91,7 @@
             ) {
                 swalWithBootstrapButtons.fire({
                     icon: 'error',
-                    title: 'Akun batal di hapus',
+                    title: 'Data batal di hapus',
                     showConfirmButton: false,
                     timer: 1500
                 })

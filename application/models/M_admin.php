@@ -33,6 +33,9 @@ class M_admin extends CI_Model
         $this->db->where($id_name, $id);
         $this->db->delete($table);
 
+        // var_dump($id_name, $id, $table);
+        // die();
+
         return true;
     }
 

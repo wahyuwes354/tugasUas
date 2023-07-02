@@ -16,7 +16,7 @@ class Wisata extends CI_Controller
 
     public function data_wisata()
     {
-        $data['page'] = "Data Pengguna";
+        $data['page'] = "Data Objek Wisata";
         $this->load->library('pagination');
 
         // styling
@@ -53,10 +53,10 @@ class Wisata extends CI_Controller
 
         // initialize pagination
         // $tabel = 'tbl_user';
-        $config['base_url'] = site_url('User/data_wisata');
+        $config['base_url'] = site_url('Wisata/data_wisata');
         $config['total_rows'] = $this->M_admin->count_data($tabel);
         $config['per_page'] = 3;
-        $config['uri_segment'] = 3;
+        // $config['uri_segment'] = 3;
 
         $this->pagination->initialize($config);
 
@@ -75,16 +75,17 @@ class Wisata extends CI_Controller
         $this->template->views('bo/Wisata/AddWisata', $data);
     }
 
-    public function UpdateUser()
+    public function UpdateWisata()
     {
-        $data['page'] = "Ubah Pengguna";
-        $table = 'tbl_user';
+        $data['page'] = "Ubah Data Wisata";
+        $table = 'tbl_wisata';
+        $data['kategori'] = $this->M_admin->get_all_date('tbl_wisata_kategori')->result();
 
-        $id_user = $this->uri->segment(3);
-        $where = array('id_user' => $id_user);
-        $data['user'] = $this->M_admin->get_where($table, $where)->row();
+        $id_wisata = $this->uri->segment(3);
+        $where = array('id_wisata' => $id_wisata);
+        $data['Wisata'] = $this->M_admin->get_where($table, $where)->row();
 
-        $this->template->views('bo/User/UpdateUser', $data);
+        $this->template->views('bo/Wisata/UpdateWisata', $data);
     }
 
     public function simpanWisata()
@@ -144,17 +145,9 @@ class Wisata extends CI_Controller
 
     public function delete($id)
     {
-        $id_name = 'id_user';
-        $this->M_admin->delete($id_name, $id, 'tbl_user');
+        $id_name = 'id_wisata';
+        $this->M_admin->delete($id_name, $id, 'tbl_wisata');
 
         echo json_encode(array("status" => TRUE));
-    }
-
-    public function get_id($id)
-    {
-        $tbl = 'tbl_calon';
-        $id_name = 'id';
-        $data = $this->admin->get_id_tbl($id_name, $tbl, $id);
-        echo json_encode($data);
     }
 }
