@@ -10,7 +10,7 @@
                     <input hidden type="text" id="id_Wisata" name="id_Wisata">
                     <div class="form-group">
                         <label for="">Role Wisata</label>
-                        <select name="role" id="role" class="form-control">
+                        <select name="kategori" id="kategori" class="form-control">
                             <?php foreach ($kategori as $ktg) { ?>
                                 <option value="<?= $ktg->id_kategori ?>" <?= ($ktg->id_kategori == $Wisata->id_kategori) ? "selected" : "" ?>><?= $ktg->kategori ?></option>
                             <?php } ?>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Nama Wisata</label>
-                        <input type="text" name="nm_lengkap" id="nm_lengkap" class="form-control" placeholder="Nama Wisata" value="<?= $Wisata->nm_wisata ?>">
+                        <input type="text" name="nm_wisata" id="nm_wisata" class="form-control" placeholder="Nama Wisata" value="<?= $Wisata->nm_wisata ?>">
                     </div>
                     <div class="form-group">
                         <label for="">lokasi Wisata</label>

@@ -88,6 +88,47 @@ class Wisata extends CI_Controller
         $this->template->views('bo/Wisata/UpdateWisata', $data);
     }
 
+    public function doUpdate()
+    {
+        $this->form_validation->set_rules('nm_wisata', 'Nama Wisata', 'required');
+        $this->form_validation->set_rules('lokasi', 'Lokasi Wisata', 'required');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi Wisata', 'required');
+        $this->form_validation->set_rules('kategori', 'kategori Wisata', 'required');
+
+        if ($this->form_validation->run() == TRUE) {
+            $nama       = $this->input->post('nm_wisata');
+            $lokasi      = $this->input->post('lokasi');
+            $deskripsi       = $this->input->post('deskripsi');
+            $id_kategori     = $this->input->post('kategori');
+            $id_wisata     = $_GET['id_wisata'];
+
+            $data = array(
+                'nm_wisata'          => $nama,
+                'id_kategori'      => $id_kategori,
+                'lokasi'         => $lokasi,
+                'deskripsi'       => $deskripsi,
+            );
+
+            $this->M_admin->update('id_wisata', $id_wisata, 'tbl_user', $data);
+
+            $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Update Berhasil</strong> Data pengguna berhasil di ubah.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>');
+            redirect('User/data_pengguna');
+        } else {
+            $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Periksa Isian!</strong>' . validation_errors() . '.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>');
+            redirect('User/UpdateUser');
+        }
+    }
+
     public function simpanWisata()
     {
         $this->form_validation->set_rules('kategori', 'Kategori Wisata', 'required');
