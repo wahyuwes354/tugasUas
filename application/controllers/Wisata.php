@@ -117,7 +117,7 @@ class Wisata extends CI_Controller
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                             </div>');
-            redirect('User/data_pengguna');
+            redirect('Wisata/data_Wisata');
         } else {
             $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                             <strong>Periksa Isian!</strong>' . validation_errors() . '.
@@ -125,7 +125,7 @@ class Wisata extends CI_Controller
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                             </div>');
-            redirect('User/UpdateUser');
+            redirect('Wisata/UpdateWisata');
         }
     }
 

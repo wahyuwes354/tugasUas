@@ -4,7 +4,7 @@
             <?= $this->session->flashdata('msg'); ?>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-success" href="<?= site_url('User/AddUser'); ?>"><i class="fa fa-user"></i> Tambah Pengguna</a>
@@ -44,22 +44,6 @@
             </div>
             <div class="card-body">
                 <?php echo $pagination; ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <span><b>Panduan Registrasi Bilik</b></span>
-            </div>
-            <div class="card-body">
-                <ol>
-                    <li> Tombol <a class="btn-success btn-sm"> Tambah Bilik</a> , untuk melakukan penambahan bilik coblos </li>
-                    <li> Tombol <a class="btn-warning btn-sm"> edit </a>, untuk merubah pengaturan bilik</li>
-                    <li> Tombol <a class="btn-danger btn-sm"> Hapus </a>, untuk Menghapus pengaturan bilik</li>
-                    <li> Tombol <a class="btn-default btn-sm"> Export Config </a> akan aktif setelah Pengaturan TPS diKunci <a class="btn-danger btn-sm"> Kunci </a>, untuk mengunduh data bilik yang akan diimport ke bilik pemilihan</li>
-                </ol>
             </div>
         </div>
     </div>
