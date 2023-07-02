@@ -5,9 +5,9 @@
             <?= $this->session->flashdata('msg'); ?>
         </div>
         <div class="card">
-            <form method="POST" action="<?= site_url('Wisata/doUpdate?id_Wisata=') . $Wisata->id_wisata ?>" id="frm_Wisata" enctype="multipart/form-data">
+            <form method="POST" action="<?= site_url('Wisata/doUpdate?id_wisata=') . $Wisata->id_wisata ?>" id="frm_Wisata" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <input hidden type="text" id="id_Wisata" name="id_Wisata">
+                    <!-- <input hidden type="text" id="id_wisata" name="id_wisata"> -->
                     <div class="form-group">
                         <label for="">Role Wisata</label>
                         <select name="kategori" id="kategori" class="form-control">
@@ -31,7 +31,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a href="<?= site_url('Wisata/Data_pengguna'); ?>" class="btn btn-danger">Batal</a>
+                    <a href="<?= site_url('Wisata/data_wisata'); ?>" class="btn btn-danger">Batal</a>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </div>
             </form>

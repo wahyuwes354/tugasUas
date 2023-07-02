@@ -95,10 +95,11 @@ class Auth extends CI_Controller
                 'username'      => $nama,
                 'email'         => $email,
                 'pass'          => md5($repass),
-                'status'        => '3',
+                'id_status'     => '3',
                 'id_role'       => '2',
             );
-
+            // var_dump($data);
+            // die();
             $this->M_admin->save($data, 'tbl_user');
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -126,10 +127,10 @@ class Auth extends CI_Controller
         // update last login
         date_default_timezone_set("ASIA/JAKARTA");
         $date = array('last_login' => date('Y-m-d H:i:s'));
-        // $id = $this->session->userdata('idnya');
-        // $this->M_auth->logout($date, $id);
+        $id = $this->session->userdata('id_user');
+        $this->M_auth->logout($date, $id);
         // destroy session
         $this->session->sess_destroy();
-        redirect('Home');
+        redirect('Home/login');
     }
 }

@@ -38,13 +38,9 @@ class M_auth extends CI_Model
             return false;
         }
     }
-
-
-
-
     public function logout($date, $id)
     {
-        $this->db->where('tbl_user.id', $id);
+        $this->db->where('tbl_user.id_user', $id);
         $this->db->update('tbl_user', $date);
     }
 }

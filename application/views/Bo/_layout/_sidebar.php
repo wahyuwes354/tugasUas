@@ -8,7 +8,7 @@
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info">
-        <a href="<?= site_url('User') ?>" class="d-block"><?php echo $this->session->userdata('nama') ?></a>
+        <a href="<?= site_url('User') ?>" class="d-block">Selamat Datang, <br><?php echo ucwords($this->session->userdata('nama')) ?></a>
       </div>
     </div>
 

@@ -28,8 +28,8 @@
                                 <td><?= ++$start ?></td>
                                 <td>
                                     <!-- <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-warning btn-sm"><i class="fa fa-key"></i> Reset</a> -->
-                                    <button onclick=delete_user(<?= $item->id_user; ?>) class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
-                                    <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-primary btn-sm"><i class="fa fa-pencil"></i> Ubah</a>
+                                    <a href="" onclick=delete_user(<?= $item->id_user; ?>) class="btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="<?= site_url('User/UpdateUser/' . $item->id_user); ?>" class=" btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                 </td>
                                 <td><?php echo $item->nama; ?></td>
                                 <td><?php echo $item->email; ?></td>

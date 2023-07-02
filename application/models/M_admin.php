@@ -10,6 +10,9 @@ class M_admin extends CI_Model
 
     public function update($name_id, $id, $table, $data)
     {
+        // var_dump($name_id, $id, $table, $data);
+        // die();
+
         try {
             $this->db->where($name_id, $id);
             $this->db->update($table, $data);

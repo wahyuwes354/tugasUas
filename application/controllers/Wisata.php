@@ -96,20 +96,24 @@ class Wisata extends CI_Controller
         $this->form_validation->set_rules('kategori', 'kategori Wisata', 'required');
 
         if ($this->form_validation->run() == TRUE) {
-            $nama       = $this->input->post('nm_wisata');
-            $lokasi      = $this->input->post('lokasi');
+            $nama            = $this->input->post('nm_wisata');
+            $lokasi          = $this->input->post('lokasi');
             $deskripsi       = $this->input->post('deskripsi');
             $id_kategori     = $this->input->post('kategori');
-            $id_wisata     = $_GET['id_wisata'];
+            $id_wisata       = $_GET['id_wisata'];
 
             $data = array(
-                'nm_wisata'          => $nama,
-                'id_kategori'      => $id_kategori,
+                'nm_wisata'      => $nama,
+                'id_kategori'    => $id_kategori,
                 'lokasi'         => $lokasi,
-                'deskripsi'       => $deskripsi,
+                'deskripsi'      => $deskripsi,
             );
 
-            $this->M_admin->update('id_wisata', $id_wisata, 'tbl_user', $data);
+            $ret = $this->M_admin->update('id_wisata', $id_wisata, 'tbl_wisata', $data);
+            // var_dump($ret);
+            // die();
+
+
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <strong>Update Berhasil</strong> Data pengguna berhasil di ubah.
