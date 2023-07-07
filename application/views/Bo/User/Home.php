@@ -27,7 +27,6 @@
                             <tr>
                                 <td><?= ++$start ?></td>
                                 <td>
-                                    <!-- <a href="<?= site_url('User/UpdateUser/' . $item->id_user) ?>" class=" btn-warning btn-sm"><i class="fa fa-key"></i> Reset</a> -->
                                     <a href="javascript:void(0)" onclick=delete_user(<?= $item->id_user; ?>) class="btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                                     <a href="<?= site_url('User/UpdateUser/' . $item->id_user); ?>" class=" btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                 </td>
@@ -96,77 +95,5 @@
                 })
             }
         })
-    }
-
-    function edit_calon(id) {
-        save_method = 'update';
-        $('#frm_calon')[0].reset(); // reset form on modals
-        // $('.form-group').removeClass('has-error'); // clear error class
-        // $('.help-block').empty(); // clear error string
-        // $('#nourut').attr('readonly',true); //set input disable
-        // $('#nmcalon').attr('hidden',true); //set input disable
-
-        //Ajax Load data from ajax
-        $.ajax({
-            url: "<?php echo site_url('User/get_id') ?>/" + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                // console.log(data);
-                $('[name="id_calon"]').val(data.id);
-                $('[name="nourut"]').val(data.nourut);
-                $('[name="nmcalon"]').val(data.nama);
-
-                $('#modal_calon').modal('show');
-                $('.modal-title').text('Edit Calon Kepala Desa');
-            },
-            error: function() {
-                alert('Gagal Memanggil Data!!');
-            }
-        });
-    }
-
-    function simpan() {
-        // $('#btnSave').text('saving...'); //change button text
-        // $('#btnSave').attr('disabled',true); //set button disable
-        var url;
-
-        if (save_method == 'add') {
-            url = "<?php echo site_url('calon/add') ?>";
-        } else {
-            url = "<?php echo site_url('calon/update') ?>";
-        }
-
-        var formData = new FormData($('#frm_calon')[0]);
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            dataType: "JSON",
-            success: function(data) {
-                console.log(data);
-
-                // if(data==true){
-                $('#modal_calon').modal('hide');
-                tblCalon.ajax.reload(null, false);
-                // }
-                // else
-                // {
-                //  swal('calon sudah ada');
-                // }
-                // $('#btnSave').text('save'); //change button text
-                // $('#btnSave').attr('disabled',false); //set button enable
-
-
-            },
-            error: function() {
-                swal('error');
-                // $('#btnSave').text('save'); //change button text
-                // $('#btnSave').attr('disabled',false); //set button enable
-
-            }
-        });
     }
 </script>
