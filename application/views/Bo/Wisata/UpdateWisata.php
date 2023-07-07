@@ -7,7 +7,6 @@
         <div class="card">
             <form method="POST" action="<?= site_url('Wisata/doUpdate?id_wisata=') . $Wisata->id_wisata ?>" id="frm_Wisata" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <!-- <input hidden type="text" id="id_wisata" name="id_wisata"> -->
                     <div class="form-group">
                         <label for="">Role Wisata</label>
                         <select name="kategori" id="kategori" class="form-control">

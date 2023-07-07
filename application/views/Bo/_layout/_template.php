@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- <html lang="en"> -->
 
 <head>
   <?php echo @$_meta; ?>

@@ -44,14 +44,25 @@ class Auth extends CI_Controller
                                                 </div>');
                 redirect('Home/Login');
             } else {
-                $userdata = array(
-                    'id_user'     => $data->id_user,
-                    'nama'        => $data->nama,
-                    'username'    => $data->username,
-                    'role'        => $data->id_role
-                );
-                $this->session->set_userdata($userdata);
-                redirect('Dashboard');
+
+                if ($data->id_status <> '1') {
+                    $this->session->set_flashdata('msg', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>Akun Tidak Aktif</strong> Akun anda tidak/Belum Aktif silakan hubungi admin, untuk mengaktifkan akun.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>');
+                    redirect('Home/Login');
+                } else {
+                    $userdata = array(
+                        'id_user'     => $data->id_user,
+                        'nama'        => $data->nama,
+                        'username'    => $data->username,
+                        'role'        => $data->id_role
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect('Dashboard');
+                }
             }
         } else {
             $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
