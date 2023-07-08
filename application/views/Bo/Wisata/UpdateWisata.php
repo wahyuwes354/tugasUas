@@ -8,7 +8,7 @@
             <form method="POST" action="<?= site_url('Wisata/doUpdate?id_wisata=') . $Wisata->id_wisata ?>" id="frm_Wisata" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Role Wisata</label>
+                        <label for="">Kategori Wisata</label>
                         <select name="kategori" id="kategori" class="form-control">
                             <?php foreach ($kategori as $ktg) { ?>
                                 <option value="<?= $ktg->id_kategori ?>" <?= ($ktg->id_kategori == $Wisata->id_kategori) ? "selected" : "" ?>><?= $ktg->kategori ?></option>

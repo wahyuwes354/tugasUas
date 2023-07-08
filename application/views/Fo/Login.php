@@ -29,7 +29,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Login Untuk Masuk Ke Akun Anda</p>
 
-                <form action="<?php echo site_url('Auth/login'); ?>" method="post">
+                <form action="<?= site_url('Auth/login'); ?>" method="post">
                     <div class="input-group mb-3">
                         <input name="Email" class="form-control" placeholder="Email">
                         <div class="input-group-append">

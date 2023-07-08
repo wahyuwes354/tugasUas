@@ -5,6 +5,12 @@
         </div>
     </div>
     <div class="col-md-12">
+        <!-- <?php echo '<pre>';
+                print_r($data);
+                print_r($start);
+                echo '</pre>'; ?> -->
+
+
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-success" href="<?= site_url('User/AddUser'); ?>"><i class="fa fa-user"></i> Tambah Pengguna</a>
@@ -32,7 +38,7 @@
                                 </td>
                                 <td><?php echo $item->nama; ?></td>
                                 <td><?php echo $item->email; ?></td>
-                                <td><?php echo $item->id_role; ?></td>
+                                <td><?php echo $item->name; ?></td>
                                 <td><?php echo $item->status; ?></td>
                             </tr>
                         <?php endforeach; ?>
@@ -59,12 +65,12 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Yakin Akan Menghapus Akun Ini ?',
-            text: "Akun Yang di hapus tidak bisa di kembalikan lagi!",
+            title: 'Yakin Akan Menghapus ?',
+            text: "Data Akan di Hapus Secara Permanen!",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Ya, Hapus',
-            cancelButtonText: 'Tidak, Batal',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
@@ -76,7 +82,7 @@
                         console.log(data);
                         swalWithBootstrapButtons.fire({
                             icon: 'success',
-                            title: 'Akun Telah berhasil di hapus',
+                            title: 'Data berhasil di hapus',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -89,7 +95,7 @@
             ) {
                 swalWithBootstrapButtons.fire({
                     icon: 'error',
-                    title: 'Akun batal di hapus',
+                    title: 'Penghapusan di Batalkan',
                     showConfirmButton: false,
                     timer: 1500
                 })

@@ -109,8 +109,6 @@ class Auth extends CI_Controller
                 'id_status'     => '3',
                 'id_role'       => '2',
             );
-            // var_dump($data);
-            // die();
             $this->M_admin->save($data, 'tbl_user');
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">

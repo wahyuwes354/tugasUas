@@ -5,6 +5,8 @@
         </div>
     </div>
     <div class="col-md-12">
+
+
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-success" href="<?= site_url('Wisata/AddWisata'); ?>"><i class="fa fa-user"></i> Tambah Wisata</a>

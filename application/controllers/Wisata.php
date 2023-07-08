@@ -47,22 +47,26 @@ class Wisata extends CI_Controller
 
         $config['attributes'] = array('class' => 'page-link');
 
-        // definiton data
-        $tabel = 'select * from tbl_wisata left join tbl_wisata_kategori on tbl_wisata.id_kategori=tbl_wisata_kategori.id_kategori';
-
 
         // initialize pagination
-        // $tabel = 'tbl_user';
+        $tabel = 'tbl_wisata';
         $config['base_url'] = site_url('Wisata/data_wisata');
         $config['total_rows'] = $this->M_admin->count_data($tabel);
         $config['per_page'] = 3;
-        // $config['uri_segment'] = 3;
-
         $this->pagination->initialize($config);
 
         $data['pagination'] = $this->pagination->create_links();
         $data['start'] = $this->uri->segment(3);
-        $data['data'] = $this->M_admin->list_data($config['per_page'],  $data['start'], $tabel);
+
+        // definiton data
+        $this->db->select('*');
+        $this->db->from('tbl_wisata AS t1');
+        $this->db->join('tbl_wisata_kategori AS t2', 't1.id_kategori = t2.id_kategori', 'left');
+        $this->db->limit($config['per_page'], $data['start']);
+        $query = $this->db->get();
+        $list = $query->result();
+
+        $data['data'] = $list;
 
         $this->template->views('bo/Wisata/Home', $data);
     }
@@ -110,10 +114,6 @@ class Wisata extends CI_Controller
             );
 
             $ret = $this->M_admin->update('id_wisata', $id_wisata, 'tbl_wisata', $data);
-            // var_dump($ret);
-            // die();
-
-
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <strong>Update Berhasil</strong> Data pengguna berhasil di ubah.

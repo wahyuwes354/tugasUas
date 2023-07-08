@@ -36,8 +36,6 @@ class M_admin extends CI_Model
         $this->db->where($id_name, $id);
         $this->db->delete($table);
 
-        // var_dump($id_name, $id, $table);
-        // die();
 
         return true;
     }
@@ -45,13 +43,13 @@ class M_admin extends CI_Model
     public function list_data($limit, $offset, $tabel)
     {
         $this->db->limit($limit, $offset);
-        $query = $this->db->query($tabel);
+        $query = $this->db->get($tabel);
         return $query->result();
     }
 
     public function count_data($tabel)
     {
-        return $this->db->query($tabel)->num_rows();
+        return $this->db->count_all($tabel);
     }
 
     public function countTable($tabel)

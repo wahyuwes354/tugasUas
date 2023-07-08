@@ -52,20 +52,29 @@ class User extends CI_Controller
 
         $config['attributes'] = array('class' => 'page-link');
 
-        // definiton data
-        $tabel = 'select * from tbl_user left join tbl_status on tbl_user.id_status=tbl_status.id_status';
-
         // initialize pagination
+        $tabel = 'tbl_user';
         $config['base_url'] = site_url('User/data_pengguna');
         $config['total_rows'] = $this->M_admin->count_data($tabel);
         $config['per_page'] = 3;
-        $config['uri_segment'] = 3;
 
         $this->pagination->initialize($config);
 
         $data['pagination'] = $this->pagination->create_links();
         $data['start'] = $this->uri->segment(3);
-        $data['data'] = $this->M_admin->list_data($config['per_page'],  $data['start'], $tabel);
+
+        // definiton data
+        $this->db->select('*');
+        $this->db->from('tbl_user AS t1');
+        $this->db->join('tbl_role AS t2', 't1.id_role = t2.id_role', 'left');
+        $this->db->join('tbl_status AS t3', 't1.id_status = t3.id_status', 'left');
+        $this->db->limit($config['per_page'], $data['start']);
+        $query = $this->db->get();
+        $list = $query->result();
+
+        $data['data'] = $list;
+
+        // $data['data'] = $this->M_admin->list_data($config['per_page'],  $data['start'], $tabel);
 
         $this->template->views('bo/User/Home', $data);
     }
